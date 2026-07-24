@@ -6,6 +6,7 @@ import json
 import subprocess
 import time
 from datetime import datetime
+import textwrap
 
 MAP_FILE = "osj_bot/git/file_map.json"
 
@@ -38,41 +39,38 @@ def fetch_file(source_path: str, retries: int = 3, delay: int = 3) -> str:
             time.sleep(delay)
     raise RuntimeError(f"Failed to fetch file {source_path} after {retries} attempts")
 
-def get_git_email() -> str:
-    """Get committer email from git config or fallback to GITHUB_ACTOR."""
-    try:
-        email = subprocess.check_output(
-            ["git", "config", "user.email"], text=True
-        ).strip()
-        if email:
-            return email
-    except Exception:
-        pass
-    return os.environ.get("GITHUB_ACTOR", "unknown") + "@users.noreply.github.com"
-
 def save_file(content: str, dest_path: str) -> None:
-    """Save content to destination path with OSJ Bot timestamp + email comment."""
-    try:
-        dir_name = os.path.dirname(dest_path)
-        if dir_name:  # only create directories if path has a folder
-            os.makedirs(dir_name, exist_ok=True)
+    """Save content to destination path with OSJ Bot timestamp comment (no email)."""
+    dir_name = os.path.dirname(dest_path)
+    if dir_name:
+        os.makedirs(dir_name, exist_ok=True)
 
-        timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-        email = get_git_email()
-        auto_comment = f"\n\n<!-- Auto updated by OSJ Bot {timestamp} ({email}) -->\n"
-        with open(dest_path, "w", encoding="utf-8") as f:
-            f.write(content + auto_comment)
-    except Exception as e:
-        raise RuntimeError(f"Failed to save file {dest_path}: {e}")
+    timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+    auto_comment = f"\n\nAuto updated by OSJ Bot {timestamp}\n"
+    with open(dest_path, "w", encoding="utf-8") as f:
+        f.write(content + auto_comment)
 
 def md_to_txt(content: str) -> str:
-    """Convert Markdown to plain text (basic stripping)."""
+    """Convert Markdown to plain text in license style formatting with 80-char wrapping."""
+    # Remove Markdown headers, emphasis, blockquotes, code fences
     text = re.sub(r'[#*_>`]', '', content)
-    text = re.sub(r'\[(.*?)\]\(.*?\)', r'\1', text)  # links
-    return text.strip()
+    # Replace links with just the text
+    text = re.sub(r'\[(.*?)\]\(.*?\)', r'\1', text)
+    # Normalize whitespace
+    text = re.sub(r'\r\n', '\n', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = re.sub(r'[ \t]+', ' ', text)
+    text = text.strip()
+
+    # Wrap text to 80 characters per line
+    wrapped_lines = []
+    for paragraph in text.split("\n\n"):
+        wrapped = textwrap.fill(paragraph, width=80)
+        wrapped_lines.append(wrapped)
+    return "\n\n".join(wrapped_lines)
 
 def txt_to_md(content: str) -> str:
-    """Convert plain text to Markdown (simple wrapping)."""
+    """Convert plain text back to Markdown (simple wrapping)."""
     return f"```\n{content}\n```"
 
 def load_map() -> dict:
@@ -123,11 +121,10 @@ def convert_file(source_path: str, dest_path: str, source_ext: str, dest_ext: st
         else:
             raise ValueError(f"Unsupported conversion: {source_ext} -> {dest_ext}")
 
-        # Update mapping with audit info
+        # Update mapping with audit info (no email stored)
         mapping[source_path] = {
             "dest": dest_path,
-            "last_updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
-            "committer_email": get_git_email()
+            "last_updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
         }
         save_map(mapping)
 
