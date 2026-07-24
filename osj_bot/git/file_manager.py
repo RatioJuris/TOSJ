@@ -1,28 +1,61 @@
 # osj_bot/git/file_manager.py
 import os
 import sys
-import requests
 import re
 import json
+import subprocess
+import time
 from datetime import datetime
 
 MAP_FILE = "osj_bot/git/file_map.json"
 
-def fetch_file(source_path: str) -> str:
-    """Fetch file from local path or URL."""
-    if source_path.startswith(("http://", "https://")):
-        response = requests.get(source_path)
-        response.raise_for_status()
-        return response.text
-    else:
-        with open(source_path, "r", encoding="utf-8") as f:
-            return f.read()
+def fetch_file(source_path: str, retries: int = 3, delay: int = 3) -> str:
+    """Fetch file from local path or external URL using curl/wget with retries."""
+    attempt = 0
+    while attempt < retries:
+        try:
+            if source_path.startswith(("http://", "https://")):
+                # Try curl first
+                try:
+                    result = subprocess.run(
+                        ["curl", "-sL", source_path],
+                        capture_output=True, text=True, check=True
+                    )
+                    return result.stdout
+                except Exception:
+                    # Fallback to wget
+                    result = subprocess.run(
+                        ["wget", "-qO-", source_path],
+                        capture_output=True, text=True, check=True
+                    )
+                    return result.stdout
+            else:
+                with open(source_path, "r", encoding="utf-8") as f:
+                    return f.read()
+        except Exception as e:
+            print(f"Fetch attempt {attempt+1} failed: {e}")
+            attempt += 1
+            time.sleep(delay)
+    raise RuntimeError(f"Failed to fetch file {source_path} after {retries} attempts")
+
+def get_git_email() -> str:
+    """Get committer email from git config or fallback to GITHUB_ACTOR."""
+    try:
+        email = subprocess.check_output(
+            ["git", "config", "user.email"], text=True
+        ).strip()
+        if email:
+            return email
+    except Exception:
+        pass
+    return os.environ.get("GITHUB_ACTOR", "unknown") + "@users.noreply.github.com"
 
 def save_file(content: str, dest_path: str) -> None:
-    """Save content to destination path with OSJ Bot timestamp comment."""
+    """Save content to destination path with OSJ Bot timestamp + email comment."""
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-    auto_comment = f"\n\n<!-- Auto updated by OSJ Bot {timestamp} -->\n"
+    email = get_git_email()
+    auto_comment = f"\n\n<!-- Auto updated by OSJ Bot {timestamp} ({email}) -->\n"
     with open(dest_path, "w", encoding="utf-8") as f:
         f.write(content + auto_comment)
 
@@ -37,33 +70,35 @@ def txt_to_md(content: str) -> str:
     return f"```\n{content}\n```"
 
 def load_map() -> dict:
-    """Load JSON mapping of source to destination files."""
+    """Load JSON mapping of source to destination files, auto-create if missing."""
     if os.path.exists(MAP_FILE):
-        with open(MAP_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(MAP_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
     return {}
 
 def save_map(mapping: dict) -> None:
-    """Save JSON mapping back to file."""
+    """Save JSON mapping back to file (create if missing, update if exists)."""
     os.makedirs(os.path.dirname(MAP_FILE), exist_ok=True)
     with open(MAP_FILE, "w", encoding="utf-8") as f:
         json.dump(mapping, f, indent=2)
 
 def convert_file(source_path: str, dest_path: str, source_ext: str, dest_ext: str) -> None:
-    """Main conversion logic with JSON tracking."""
+    """Main conversion logic with JSON tracking and audit trail."""
     mapping = load_map()
     prev_content = None
 
     if source_path in mapping:
         try:
-            with open(mapping[source_path], "r", encoding="utf-8") as f:
+            with open(mapping[source_path]["dest"], "r", encoding="utf-8") as f:
                 prev_content = f.read()
         except FileNotFoundError:
             prev_content = None
 
     content = fetch_file(source_path)
 
-    # Only convert if content changed
     if prev_content == content:
         print(f"No changes detected in {source_path}, skipping conversion.")
         return
@@ -79,8 +114,12 @@ def convert_file(source_path: str, dest_path: str, source_ext: str, dest_ext: st
     else:
         raise ValueError(f"Unsupported conversion: {source_ext} -> {dest_ext}")
 
-    # Update mapping
-    mapping[source_path] = dest_path
+    # Update mapping with audit info (create if missing, update if exists)
+    mapping[source_path] = {
+        "dest": dest_path,
+        "last_updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "committer_email": get_git_email()
+    }
     save_map(mapping)
 
 if __name__ == "__main__":
