@@ -22,6 +22,8 @@ def osj_ensure_dependencies():
 osj_ensure_dependencies()
 
 OSJ_MAP_FILE = "osj_bot/git/file_map.json"
+OSJ_CENTER_WIDTH = 80  # only used to center title/preamble header lines
+
 
 def osj_fetch_file(source_path, retries=3, delay=3):
     attempt = 0
@@ -43,6 +45,7 @@ def osj_fetch_file(source_path, retries=3, delay=3):
             time.sleep(delay)
     raise RuntimeError(f"Failed to fetch file {source_path} after {retries} attempts")
 
+
 def osj_save_license(content, dest_path):
     dir_name = os.path.dirname(dest_path)
     if dir_name:
@@ -56,22 +59,65 @@ def osj_save_license(content, dest_path):
     with open(dest_path, "w", encoding="utf-8") as f:
         f.write(content + footer)
 
-def osj_md_to_license_txt(content):
-    html = markdown.markdown(content)
+
+def osj_md_to_license_txt(content, center_width=OSJ_CENTER_WIDTH):
+    """
+    Convert Markdown license text into plain-text formatting similar to
+    MIT/Apache-style LICENSE files.
+
+    - No hard line-wrapping/capping: paragraphs and list items are emitted
+      as full single lines, whatever their length.
+    - Lines before the PREAMBLE section are centered (title/header block).
+    - Lists keep their bullet/number markers instead of losing them to
+      plain text extraction.
+    - Blocks are separated by blank lines by walking top-level HTML
+      elements rather than flattening everything with get_text().
+    """
+    html = markdown.markdown(content, extensions=["extra"])
     soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text("\n").strip()
-    lines = text.split("\n")
-    converted_lines = []
+
+    blocks = []
     preamble_found = False
-    for line in lines:
-        if "PREAMBLE" in line:
-            preamble_found = True
-            converted_lines.append(line)
-        elif not preamble_found:
-            converted_lines.append(line.center(80))
+
+    for el in soup.find_all(recursive=False):
+        tag = el.name
+
+        if tag in ("h1", "h2", "h3", "h4", "h5", "h6"):
+            text = el.get_text(" ", strip=True)
+            if "PREAMBLE" in text.upper():
+                preamble_found = True
+            if not preamble_found:
+                blocks.append(text.center(center_width))
+            else:
+                blocks.append(text)
+
+        elif tag == "p":
+            text = el.get_text(" ", strip=True)
+            if "PREAMBLE" in text.upper():
+                preamble_found = True
+            if not preamble_found:
+                blocks.append(text.center(center_width))
+            else:
+                blocks.append(text)
+
+        elif tag in ("ul", "ol"):
+            items = []
+            for i, li in enumerate(el.find_all("li", recursive=False), start=1):
+                li_text = li.get_text(" ", strip=True)
+                marker = f"{i}." if tag == "ol" else "-"
+                items.append(f"{marker} {li_text}")
+            blocks.append("\n".join(items))
+
+        elif tag == "hr":
+            blocks.append("-" * center_width)
+
         else:
-            converted_lines.append(line)
-    return "\n".join(converted_lines)
+            text = el.get_text(" ", strip=True)
+            if text:
+                blocks.append(text)
+
+    return "\n\n".join(b for b in blocks if b.strip() != "" or b == "")
+
 
 def osj_load_map():
     if os.path.exists(OSJ_MAP_FILE):
@@ -82,6 +128,7 @@ def osj_load_map():
             return {}
     return {}
 
+
 def osj_save_map(mapping):
     dir_name = os.path.dirname(OSJ_MAP_FILE)
     if dir_name:
@@ -89,29 +136,37 @@ def osj_save_map(mapping):
     with open(OSJ_MAP_FILE, "w", encoding="utf-8") as f:
         json.dump(mapping, f, indent=2)
 
+
 def osj_convert_license(source_path, dest_path):
     try:
         mapping = osj_load_map()
-        prev_content = None
-        if source_path in mapping:
-            try:
-                with open(mapping[source_path]["dest"], "r", encoding="utf-8") as f:
-                    prev_content = f.read()
-            except FileNotFoundError:
-                prev_content = None
+
+        # NOTE: previously this compared the freshly-fetched raw Markdown
+        # against the *converted* plain-text file read back from dest_path.
+        # Those are never equal (one is Markdown, the other is centered/
+        # converted output), so the "skip if unchanged" check never fired.
+        # Fix: cache the raw source content itself in file_map.json and
+        # compare against that instead.
+        prev_raw_content = mapping.get(source_path, {}).get("raw_content")
+
         content = osj_fetch_file(source_path)
-        if prev_content == content:
+
+        if prev_raw_content == content:
             print(f"No changes detected in {source_path}, skipping conversion.")
             return
+
         converted = osj_md_to_license_txt(content)
         osj_save_license(converted, dest_path)
+
         mapping[source_path] = {
             "dest": dest_path,
-            "last_updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+            "raw_content": content,
+            "last_updated": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
         }
         osj_save_map(mapping)
     except Exception as e:
         print(f"Error during conversion: {e}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
