@@ -1,0 +1,33 @@
+name: Sync License File
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  convert-license:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Conversion
+        run: |
+          python osj_bot/git/file_manager.py OSJ_License.md License.txt md txt
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git add License.txt osj_bot/git/file_map.json
+          git commit -m "Auto update by OSJ Bot: Synced OSJ_License.md → License.txt"
+          git push
