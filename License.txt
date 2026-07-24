@@ -1,0 +1,223 @@
+THE OPEN SOURCE JOURNAL LICENSE
+
+Copyright (c) The Open Source Journal 2026
+
+ PREAMBLE
+
+This document constitutes The Open Source Journal License (hereinafter referred to as "The OSJL", "The OSJ License", or "the licence"). It serves as the absolute, non-negotiable legal and operational instrument to guarantee that knowledge remains a free, unobstructed, and universally accessible heritage.
+
+This licence is designed to eradicate gatekeeping, permanently abolish the financial commodification of human wisdom, and legally enshrine the verbatim intent of the original author against any form of intellectual supersession, theft, or adulteration.
+
+Any Article distributed under the licence is permanently protected by the following absolute conditions.
+
+ SECTION 1: DEFINITIONS, GOVERNANCE, AND AUTHENTICATION
+
+ 1.1 Definition of an Article
+
+For the purposes of this licence, the term "Article" shall be defined universally and comprehensively. It includes, but is not limited to: software, research papers, source code, compiled code, images, dissertations, academic or philosophical papers, mobile or desktop applications, news reports, hardware schematics, and anything else conceptualised or created, whether existing in a digital state or manifested in physical form.
+
+ 1.2 Governance, Conflict Resolution, and Amendments
+
+(a) The interpretation, application, and governance of this licence, including any conflict resolution, shall be strictly as per the Open Source Journal Charter, the Open Source Journal Rules, and the Open Source Journal Doctrine.
+
+(b) Any changes, alterations, or amendments to the text or terms of this licence are strictly prohibited unless explicitly authorised and formally notified as per the OSJ Charter.
+
+ 1.3 Evaluation, The OSJOID, and Cryptographic Traceability
+
+Protection under this licence attaches provisionally and immediately upon publication of an Article bearing the notice set out in How to Apply These Terms. The CryptoID is a standard cryptographic hash of the author's file, computed either by the author directly or by The Open Source Journal's portal upon the author's upload; both methods use the same hashing standard and produce an identical fingerprint for an identical file, so the Article's protection under this paragraph does not depend on which method the author used. Generating a CryptoID requires no review, no approval, and no waiting period for this provisional protection to take effect.
+
+The CryptoID is proof of submission, not a certificate or proof of originality. Its uniqueness proves only that the submitted file matches that fingerprint. It does not, and cannot, certify that the Article's content is original. An exact copy of an existing work produces the same hash as the original and is caught immediately as a duplicate; a paraphrased, translated, or otherwise reworded copy produces a different hash while remaining just as plagiarised, and a hash alone cannot detect it. That determination is made only through the review described in paragraph (b), which includes a check for plagiarism and substantial copying.
+
+Provisional protection under this paragraph is void, from the moment of copying, as against the true original author of any Article later confirmed by that review to be substantially copied or plagiarised. A submitter cannot obtain a valid claim over another's work merely by hashing and publishing a copy first; the true author's rights under this licence are unaffected by another party's CryptoID, OSJOID application, or publication date.
+
+(a) The OSJOID is a separate, subsequent step. An author may submit a CryptoID-bearing Article to The Open Source Journal for OSJOID issuance. The OSJOID is issued only once evaluated, and maps a given author, project, and CryptoID value to one another; it is what converts the provisional protection above into a confirmed, verified claim of authorship.
+
+(b) Review, not judgment, and never in closed session. OSJOID issuance follows review by independent reviewers and OSJ Members, assisted by artificial intelligence tools used strictly to support that human review, for example by detecting duplicate or near-duplicate submissions, likely impersonation, or substantial similarity to a prior work, and never to autonomously decide the outcome. This review is conducted openly in the public domain and never in closed or private session; the submitting author, and any other entity, may participate in the public discussion before it concludes. Review does not evaluate the merit, quality, or credentials of the Article or its author; consistent with Section 2(f) of the Doctrine, it is confined to authenticity, originality, and anti-fraud verification, and may not be used as a pretext for credential-based or institutional exclusion.
+
+(c) Timeline and process. Review may conclude in minutes or may take substantially longer; there is no fixed ceiling. The review proceeds by the consensus procedure Article 15 of the Charter provides: the submission is published for open, public comment, and an OSJOID is issued once no reasoned objection is maintained, or upon resolution of any objection raised. The full record of that public discussion remains permanently and publicly accessible through the OSJ registry.
+
+(d) Jurisdiction rests with the Charter. Matters of jurisdiction, procedure, and governance concerning the CryptoID and the OSJOID, including the conduct of the review under paragraph (b), rest exclusively with the OSJ Charter. The Doctrine of Judicial Justice and Absolute Justice has no jurisdiction over these matters.
+
+(e) The registry is decentralised. The database mapping CryptoIDs to OSJOIDs, authors, and projects is public and mirrored across Nodes; no single outage, seizure, or unavailability of any one copy removes or invalidates a CryptoID's provisional protection, or an already-issued OSJOID's confirmed record.
+
+(f) Traceability. It is acknowledged that the raw CryptoID of a digital file may naturally alter due to benign electronic transmission, data compression, or format shifting. Therefore, the Article must perpetually bear its written OSJOID once issued, or its self-generated or portal-generated CryptoID before then, so that any user, anywhere in the world, can trace the file back to the public registry to verify authorship.
+
+ SECTION 2: THE ABSOLUTE RIGHTS AND ANTI-GATEKEEPING MANDATE
+
+ 2.1 The Principle of Free Knowledge
+
+Knowledge is inherently free. Charging in any form - whether to gain institutional leverage, financial profit, or commercial goodwill - from the intellectual property of any Article governed by this licence is strictly prohibited. This constitutes the absolute, non-negotiable instrument of The OSJ License.
+
+ 2.2 The Prohibition of Gatekeeping
+
+The Open Source Journal facilitates and ensures that no gatekeeping is practised by any academic, non-academic, or technological institution. The OSJ License mandates the following absolute rights with respect to any submitted or published Article:
+
+(a) No institutional or platform membership of any kind is required.
+
+(b) No publication fee of any kind is required from the author.
+
+(c) No access fee, subscription, or membership is required for the public to read, access, or execute the material.
+
+(d) The implementation of a membership requirement, paywall, or any similar feature designed to restrict access is deemed an explicit, direct violation of the licence.
+
+(e) No platform fees, hosting fees, or hidden charges shall be levied at any stage of access or digital distribution.
+
+ SECTION 3: PLAGIARISM, MISAPPROPRIATION, AND TRANSLATION
+
+ 3.1 Prohibition of Misappropriation and Plagiarism
+
+Claiming authorship over, or misappropriating the Article of another person, institution, or entity as one's own, is completely forbidden. Knowledge cannot be merely reproduced to falsely inflate another's credentials; it can only be learned. To learn, one must understand the language and the concept.
+
+ 3.2 The Right to Translate (The Good-Faith Harbour)
+
+Because the actual verbatim text cannot be modified, anyone may translate the language of the original Article strictly to facilitate global comprehension. Linguistic shifts inherent and necessary to accurate translation shall not be deemed "alteration", provided the translator acts in good faith to preserve the original conceptual truth. Any individual undertaking a translation must adhere to the following strict parameters:
+
+(a) The translator must not omit The OSJ License or substitute it with any different licence.
+
+(b) The translator must explicitly retain the original author's name as the sole creator of the Article.
+
+(c) The translator may use their own name merely under the designation of a "translator", and never as a co-author or creator of the original work.
+
+ SECTION 4: MODIFICATION, EVOLUTION, AND STRUCTURAL ADAPTATION
+
+ 4.1 Prohibition of Logical Modification and Supersession
+
+Malicious modification of the actual text, logic, mathematics, code, or conceptual intent of an Article is not permitted in any form. Any such modification is legally recognised as an illicit attempt to omit, overwrite, or supersede the actual work of the original author.
+
+ 4.2 Permitted Modifications and Evolutionary Derivatives
+
+Licensees may modify the Work only if such modifications constitute an "Evolutionary Derivative." An Evolutionary Derivative is strictly defined as a modification that introduces new, independent functional logic, algorithmic capabilities, or verifiable performance enhancements (demonstrated by a minimum 20% increase in computational or structural efficiency as measured by public benchmarking suites).
+
+(a) Explicit Exclusions: Subjective, cosmetic, or non-functional alterations - including but not limited to renaming variables, altering code comments, refactoring for stylistic preferences, changing user interface aesthetics, or rebranding - do not constitute an Evolutionary Derivative. Any such alteration, if distributed, shall be treated as an unauthorised, infringing derivative work.
+
+(b) Functional Distinction Test: To qualify under this section, the newly introduced components must be functionally distinct, meaning they provide independent logic or utility that can be clearly identified and separated (e.g., as a distinct module or repository branch), even if they rely on the original architecture to compile or execute.
+
+ 4.3 Standard Implementation Safe Harbor
+
+Any licensee who reproduces, compiles, prints, or executes the Work exactly as specified in the original source, without any alterations to its functional logic, text, or core architecture, is operating under a strict Safe Harbor.
+
+(a) Absolute Immunity: Verbatim implementation or reproduction of the unchanged Work shall never be construed as an unauthorised derivative work or an infringement of the Author's rights.
+
+(b) Anti-Fragmentation: If a licensee alters the core specification but continues to distribute it under the Work's original name or branding, they lose this Safe Harbor. The work will immediately be classified as a fragmented, infringing derivative under Clause 4.2.
+
+ 4.4 Format Evolution Exception
+
+As time and technology evolve, the physical or digital format of the Article may need to change. Updates to the design, style, formation, typography, and technological layout are permitted, provided the name of the original author remains paramount and unremoved. The entity facilitating these formatting updates may append their name merely as a "modification facilitator".
+
+ SECTION 5: THE ANTI-ALTERATION MANDATE (THE ADULTERATION CLAUSE)
+
+ 5.1 Absolute Prohibition of Alteration
+
+Alteration of the verbatim meaning, data, conclusions, or foundational architecture of the original Article (outside the bounds of legitimate evolutionary advancement as defined in Section 4.2) is strictly and unconditionally prohibited.
+
+ 5.2 Equivalency to Adulteration
+
+Under The OSJ License, the illicit intellectual alteration of a protected Article is regarded with the utmost severity. It is legally, ethically, and philosophically classified as an act of deceit equivalent to food adulteration, poisoning the well of human knowledge. Any such act immediately voids the violator's rights under the licence.
+
+ SECTION 6: TRANSPARENCY, CITATION, AND THE DOCTRINE OF ABSOLUTE JUSTICE
+
+ 6.1 Mandatory Public Citation and Attribution
+
+Citation of, and attribution to, any Article licensed under The OSJ License or governed by The Open Source Journal shall be kept strictly public.
+
+ 6.2 The Digital Access Covenant and Anti-Suppression Mandate
+
+In strict accordance with the Doctrine of Judicial Justice and Absolute Justice - which dictates that "what cannot be given or reinstated cannot be taken" - no entity may extract value from this Work while technically suppressing the Author's reciprocal digital equity.
+
+(a) Condition of Access: The rights to digitally access, read, parse, or index the metadata, abstracts, or text of this Article are conditionally granted as a binding Digital Covenant. By accessing the Article, any third-party entity (including indexing platforms, journalists, search algorithms, and academic databases) explicitly agrees to waive any statutory "Fair Use" or "Fair Dealing" defences regarding digital citation suppression.
+
+(b) Link Integrity and Reciprocity: Any digital citation, review, aggregation, or index referencing the Work must include a direct, uninhibited hyperlink to the original Open Source Journal repository or canonical URL. This hyperlink must remain fully indexable and explicitly must not contain rel="nofollow", rel="ugc", rel="sponsored", or any algorithmic tag designed to sequester digital recognition.
+
+(c) Breach of Absolute Justice: The deliberate use of suppression tags while extracting the Work's metadata or text constitutes a bad-faith breach of this Access Covenant. It shall not be prosecuted merely as copyright infringement, but as a direct breach of contract and an illicit digital taking, immediately triggering the enforcement protocols outlined in Section 8.
+
+ 6.3 Disclosure of Processes and Goodwill
+
+Absolute transparency is required. Any entity, platform, or individual utilising an OSJL-licensed Article must make a full public disclosure regarding their publication processes and any gain of institutional prestige, commercial leverage, or goodwill derived from the utilisation of the Article.
+
+ 6.4 Unconditional Public Access
+
+Any published Article governed by this licence must ensure that the main Article remains permanently accessible to the public for free.
+
+ 6.5 Mandatory Disclaimer of Use
+
+A clear, prominent disclaimer regarding the use of the Article in any form shall be made explicitly acknowledging The Open Source Journal License as the governing authority of the original work.
+
+ SECTION 7: DISTRIBUTION AND REDISTRIBUTION
+
+ 7.1 Distribution in Good Faith
+
+The distribution of the original, unmodified Article is fully permitted and is regarded as an act of goodwill conducted in good faith, provided it strictly adheres to all mandates herein.
+
+ 7.2 Verbatim Printing and Material-Cost Ceilings
+
+Any entity is fully permitted to print, copy, and distribute physical copies of this Work exactly "as it is" (Verbatim Distribution). This act does not constitute a violation of this Licence, provided the commercial transaction strictly adheres to the following financial boundaries:
+
+(a) Cost Recovery Limitation: The fee charged to recipients for a physical, verbatim copy of the Work must strictly represent the direct, raw material cost of manufacturing (third-party paper, ink, binding, and immediate postage invoices).
+
+(b) Explicit Accounting Prohibitions: Under no circumstances shall "manufacturing costs" include internal corporate labour, administrative wages, server maintenance, overhead, legal fees, marketing expenses, or electricity.
+
+(c) The Absolute Markup Ceiling: To ensure this exemption scales fairly with global inflation, the total price charged to an end-user for a physical copy shall never exceed 115% of the raw, receipted third-party manufacturing and shipping invoice. Charging any amount above this percentage ceiling automatically reclassifies the distribution as an unauthorised, commercial infringement.
+
+(d) Mandatory Consumer Notice: Every printed, verbatim copy must display the following notice in a minimum 12-point font on the front cover or first title page:
+
+ "This is a verbatim print of a free open-source work. You have the right to download the digital original entirely for free. The price charged for this physical copy is strictly limited by law to raw manufacturing costs."
+
+ 7.3 Redistribution
+
+The redistribution of the Article, entirely without alteration, is fully permitted and is likewise regarded as an act of goodwill in good faith.
+
+ 7.4 Voidance of Rights
+
+Any attempt to distribute or redistribute an altered, modified, or monetised version of the Article constitutes a severe breach of this licence and immediately voids all permissions, protections, and rights granted to the violator.
+
+ SECTION 8: ENFORCEMENT, PENALTIES, AND JURISDICTION
+
+ 8.1 Compensatory Restitution and Financial Fines
+
+Any corporate entity, academic institution, or commercial distributor found to be in violation of the Anti-Gatekeeping Mandate (Section 2), the Anti-Alteration Mandate (Section 5), the Anti-Suppression Mandate (Section 6.2), or the Material-Cost Ceilings (Section 7.2) shall be liable for strict financial restitution.
+
+(a) The violator shall be liable for compensatory damages calculated at no less than three times (3x) the gross commercial revenue derived from the infringing act, representing a genuine pre-estimate of the digital equity, goodwill, and market value unlawfully taken from the original Author and The Open Source Journal.
+
+(b) This financial restitution is levied in addition to the immediate, mandatory forfeiture of all illicitly acquired commercial profits.
+
+ 8.2 Governing Law, Jurisdiction, and Dispute Venue
+
+All matters regarding governing law, jurisdiction, conflict resolution, and dispute venue arising out of or relating to this licence shall be governed exclusively and strictly as per the Open Source Journal Charter, the Open Source Journal Rules, and the Open Source Journal Doctrine.
+
+ 8.3 Jurisprudence
+
+The jurisprudence of this licence is derived unequivocally from the core, uncompromising concepts of Judicial Justice and Absolute Justice, as set out in the Doctrine of Judicial Justice and Absolute Justice. It exists to ensure that truth is defended without financial prejudice, and that the fundamental right of humanity to access pure, untampered wisdom remains eternally sovereign.
+
+---
+
+Authored by The Open Source Journal.
+This document is the official OSJL text. Licensed for universal distribution in good faith. No alterations to this licence are permitted.
+
+ How to Apply These Terms to Your New Article
+
+To unconditionally protect your work under the Open Source Journal License (OSJL) and ensure it remains free from gatekeeping, commercial commodification, or illicit alteration, you must attach a clear legal notice to it.
+
+For maximum legal enforceability, this notice should be placed prominently on the title page, within the digital document's metadata, or at the very beginning of the primary source repository.
+
+Directions:
+
+1. Finalise your Article: Ensure your document, code, or research is in its absolute final state.
+2. Get your CryptoID: Either compute a standard cryptographic hash of your finalised file yourself, or upload the file to The Open Source Journal's portal and let it compute the same hash for you. Either way this is your CryptoID, it is proof of submission rather than a certificate of originality, and no review or approval is needed before it takes effect.
+3. Attach the Notice: Copy the standard notice text below, insert your CryptoID and the other bracketed details, and place it at the beginning of your work. Your Article is now fully protected under this licence.
+4. (Optional) Submit for OSJOID: You may additionally submit your Article and its CryptoID to The Open Source Journal's public registry for OSJOID issuance, described in Section 1.3. This adds a verified, publicly-mapped record of authorship; it is not required for the protection your Article already has under Step 3.
+5. Provide the Full Licence: Either include the complete OSJL text in an accompanying LICENSE document or provide a direct, permanent hyperlink to the official OSJL text so users can read their exact rights and restrictions.
+
+ {Name of the Article} is licensed under the Open Source Journal License (OSJL).
+
+ CryptoID: {Insert your self-generated CryptoID here}
+ OSJOID: {Insert Issued OSJOID Here, or write "pending" if not yet issued}
+
+ Copyright (C) {Year} {Full Name of Author}
+
+ This Article constitutes free knowledge: you can redistribute it, translate it, or execute standard verbatim implementations under the strict, non-negotiable terms of the Open Source Journal License as published by The Open Source Journal.
+
+ This Article is distributed in good faith, with the absolute intent that it remains a free, unobstructed, and universally accessible heritage. Any alteration of its verbatim text, malicious logical modification, gatekeeping, or technical suppression of its citations by third-party entities is strictly prohibited and constitutes a direct breach of the OSJ Doctrine of Judicial Justice and Absolute Justice.
+
+ You should have received a copy of the Open Source Journal License along with this Article. If not, you may verify the cryptographic authenticity and authorship of this document via its CryptoID, and its OSJOID once issued, at {Insert Official OSJ URL/Registry Link}.
+
+<!-- Auto updated by OSJ Bot 2026-07-24 07:17:01 UTC (RatioJuris@users.noreply.github.com) -->
