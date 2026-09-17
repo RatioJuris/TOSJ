@@ -1,14 +1,7 @@
 name: OSJ License Sync
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "OSJ_License.md"
-  schedule:
-    - cron: "0 0 * * *"   # Runs nightly at midnight UTC
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -20,7 +13,7 @@ concurrency:
 jobs:
   osj-convert-license:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
     steps:
       - name: OSJ Checkout Repository
         uses: actions/checkout@v4
@@ -31,24 +24,31 @@ jobs:
       - name: OSJ Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: OSJ Install Dependencies
-        run: pip install markdown beautifulsoup4
+        run: |
+          python -m pip install --upgrade pip
+          pip install markdown beautifulsoup4
 
       - name: OSJ Run License Conversion
         run: |
           python osj_bot/git/file_manager.py OSJ_License.md License.txt
 
-      - name: OSJ Commit License Update
+      - name: OSJ Commit and Push License Update
         run: |
           git config --global user.name "OSJ Bot"
           git config --global user.email "osj-bot@users.noreply.github.com"
+
           git add License.txt osj_bot/git/file_map.json
+
           if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "OSJ Bot: Synced OSJ_License.md → License.txt [skip ci]"
-            git pull --rebase origin main
-            git push
+            echo "No changes to commit."
+            exit 0
           fi
+
+          git commit -m "OSJ Bot: Synced OSJ_License.md to License.txt"
+
+          git pull --rebase origin main
+          git push origin HEAD:main
+`
